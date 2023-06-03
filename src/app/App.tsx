@@ -6,9 +6,9 @@ import {authApi} from "../features/auth/auth.api";
 
 function App() {
     const isLoading = useAppSelector((state) => state.app.isLoading);
-    const a=authApi.register()
-    console.log(a.then(res=>{
-        console.log(res)}))
+    // const a=authApi.register()
+    // console.log(a.then(res=>{
+    //     console.log(res)}))
     const dispatch = useAppDispatch();
 
     useEffect(() => {
