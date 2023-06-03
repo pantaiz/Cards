@@ -1,22 +1,34 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {ArgRegisterType, authApi} from "./auth.api";
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {ArgLoginType, ArgRegisterType, authApi, ProfileType} from "./auth.api";
+import {AppDispatch} from "../../app/store";
 
-const register = createAsyncThunk("auth/register", (arg: ArgRegisterType, thunkAPI) => {
-    authApi.register(arg).then((res) => {
-        debugger
-    })
+const register = createAsyncThunk("auth/register", async (arg: ArgRegisterType, ) => {
+    await authApi.register(arg)
 })
 
-const login = createAsyncThunk("auth/login", (arg:any, thunkAPI) => {
-    authApi.login(arg).then(res=>{
-debugger
-    })
+const login = createAsyncThunk <{profile: ProfileType}, ArgLoginType,{
+    state?:unknown,
+    dispatch:AppDispatch,
+    rejectValue?:unknown
+}>
+("auth/login", async (arg) => {
+    const res = await authApi.login(arg)
+    return {profile: res.data}
 })
 const slice = createSlice({
     name: "auth",
-    initialState: {},
+    initialState: {
+        profile: null as ProfileType | null
+    },
     reducers: {},
+    extraReducers: builder => {
+        builder
+            .addCase(login.fulfilled, (state, action) => {
+                state.profile = action.payload.profile
+            })
+    }
 });
 
 export const authReducer = slice.reducer;
-export const authThunks = {register,login}
+export const authActions = slice.actions;
+export const authThunks = {register, login}

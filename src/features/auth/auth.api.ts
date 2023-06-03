@@ -7,7 +7,7 @@ export const authApi = {
     },
     login: (arg: any) => {
         //TODO
-        return instance.post<LoginResponseType>('/auth/login', arg)
+        return instance.post<ProfileType>('/auth/login', arg)
     }
 }
 
@@ -19,10 +19,10 @@ export type ArgLoginType = {
     rememberMe: boolean,
 }
 export type RegisterResponseType = {
-    addedUser: Omit<LoginResponseType, 'token'|'tokenDeathTime'> ;
+    addedUser: Omit<ProfileType, 'token'|'tokenDeathTime'> ;
 }
 
-export type LoginResponseType = {
+export type ProfileType = {
     _id: string;
     email: string;
     rememberMe: boolean;
