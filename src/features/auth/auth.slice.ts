@@ -1,16 +1,13 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {ArgLoginType, ArgRegisterType, authApi, ProfileType} from "./auth.api";
 import {AppDispatch} from "../../app/store";
+import {createAppAsyncThunk} from "../../common/utils/createAsyncThunk";
 
-const register = createAsyncThunk("auth/register", async (arg: ArgRegisterType, ) => {
+const register = createAppAsyncThunk("auth/register", async (arg: ArgRegisterType, ) => {
     await authApi.register(arg)
 })
 
-const login = createAsyncThunk <{profile: ProfileType}, ArgLoginType,{
-    state?:unknown,
-    dispatch:AppDispatch,
-    rejectValue?:unknown
-}>
+const login = createAppAsyncThunk <{profile: ProfileType}, ArgLoginType>
 ("auth/login", async (arg) => {
     const res = await authApi.login(arg)
     return {profile: res.data}
