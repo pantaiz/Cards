@@ -5,13 +5,15 @@ import {store} from './app/store';
 import App from './app/App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import {createBrowserRouter, createHashRouter, RouterProvider} from "react-router-dom";
 import {Register} from "./features/auth/Register/Register";
 import {Login} from "./features/auth/Login/Login";
+import {ForgotPassword} from "./features/auth/ForgotPassword/ForgotPassword";
+import {CreateNewPassword} from "./features/auth/CreateNewPassword/CreateNewPassword";
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
-const router = createBrowserRouter([
+const router = createHashRouter([
     {
         path: "/",
         element: <div>Hello world!</div>
@@ -23,6 +25,14 @@ const router = createBrowserRouter([
     {
         path: "/register",
         element: <Register/>
+    },
+    {
+        path: "/forgot-password",
+        element: <ForgotPassword/>
+    },
+    {
+        path: "/set-new-password/:tokens",
+        element: <CreateNewPassword/>
     },
     {
         path: "/packs",
