@@ -6,16 +6,15 @@ import {Button, Checkbox, FormControlLabel, Paper, Typography} from "@mui/materi
 import {ArgLoginType} from "../auth.api";
 import {EmailInput} from "../../../common/components/LoginInput/EmailInput";
 import {PasswordInput} from "../../../common/components/PasswordInput/PasswordInput";
-import {Link, Navigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 export const Login = () => {
     const dispatch = useAppDispatch();
-    const loginHandler = (data: ArgLoginType) => {
-        dispatch(authThunks.login(data));
-    };
+
     const methods = useForm<ArgLoginType>();
     const onSubmit: SubmitHandler<ArgLoginType> = (data) => {
-        loginHandler(data);
+        console.log(data)
+        dispatch(authThunks.login(data));
     };
     return (
         <div>

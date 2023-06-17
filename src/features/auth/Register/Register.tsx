@@ -11,10 +11,13 @@ import {Link} from "react-router-dom";
 export const Register = () => {
     const dispatch = useAppDispatch();
     const methods = useForm<ArgRegisterType>();
+
     const onSubmit: SubmitHandler<ArgRegisterType> = (data) => {
         dispatch(authThunks.register(data));
     };
+
         //TODO проверку пароля со вторым инпутом
+
     return (
         <div className={s.container}>
             <Paper elevation={3} sx={{p: 3, mt: 12, width: ' 500px', borderRadius: '5px', mx: 'auto'}}>
@@ -23,8 +26,7 @@ export const Register = () => {
                 </Typography>
                 <FormProvider {...methods}>
                     <form className={s.container} onSubmit={methods.handleSubmit(onSubmit)}>
-
-                        <EmailInput label={'Login'}/>
+                        <EmailInput label={'Email'}/>
                         <PasswordInput label={'Password'}/>
                         <PasswordInput label={'Confirm Password'}/>
                         <Button type="submit" variant="contained" color="primary">

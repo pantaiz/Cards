@@ -15,7 +15,9 @@ const register = createAppAsyncThunk<void, ArgRegisterType>("auth/register", asy
 
 const login = createAppAsyncThunk<{ profile: ProfileType }, ArgLoginType>
 ("auth/login", async (arg) => {
-    const res = await authApi.login(arg)
+        const res = await authApi.login(arg)
+        console.log(res);
+
     return {profile: res.data}
 })
 
@@ -32,7 +34,8 @@ const createNewPassword = createAppAsyncThunk<{ }, CreateNewPasswordType>
 const slice = createSlice({
     name: "auth",
     initialState: {
-        profile: null as ProfileType | null
+        profile: null as ProfileType | null,
+        isLoggedIn: false,
     },
     reducers: {},
     extraReducers: builder => {

@@ -11,7 +11,7 @@ const slice =createSlice({
     initialState:{
         error:null as null|string,
         isLoading:true,
-        isAppInitialized:false
+        isAppInitialized:false,
     },
     reducers:{
         setIsLoading:(state, action:PayloadAction<{isLoading:boolean}>)=>{

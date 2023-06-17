@@ -7,6 +7,7 @@ export const authApi = {
     },
     login: (arg: ArgLoginType) => {
         //TODO
+        console.log(arg)
         return instance.post<ProfileType>('/auth/login', arg)
     },
     forgotPassword: (arg: ForgotPasswordType) => {

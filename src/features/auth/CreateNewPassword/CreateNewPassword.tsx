@@ -3,7 +3,7 @@ import s from './styles.module.css'
 import {FormProvider, SubmitHandler, useForm} from "react-hook-form";
 import {Button, Paper, Typography} from "@mui/material";
 import {CreateNewPasswordType} from "../auth.api";
-import {Navigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {PasswordInput} from "../../../common/components/PasswordInput/PasswordInput";
 import {authThunks} from "../auth.slice";
 
@@ -25,7 +25,6 @@ export const CreateNewPassword = () => {
         methods.reset();
     };
     return (
-
         <div className={s.container}>
             <Paper elevation={3} sx={{p: 3, m: 2, mx: 'auto'}}>
                 <Typography variant="h4" align="center" gutterBottom>

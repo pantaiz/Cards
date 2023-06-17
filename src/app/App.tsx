@@ -1,27 +1,55 @@
 import {useAppDispatch, useAppSelector} from "./hooks";
-import {useEffect} from "react";
-import {Counter} from "../features/counter/Counter";
-import {appActions} from "./app.slice";
-import {authApi} from "../features/auth/auth.api";
+import React from "react";
+import {createHashRouter, RouterProvider} from "react-router-dom";
+import {Login} from "../features/auth/Login/Login";
+import {Profile} from "../features/Profile/Profile";
+import {Register} from "../features/auth/Register/Register";
+import {ForgotPassword} from "../features/auth/ForgotPassword/ForgotPassword";
+import {CreateNewPassword} from "../features/auth/CreateNewPassword/CreateNewPassword";
+import {store} from "./store";
+
+import {createTheme, ThemeProvider} from "@mui/material";
+import { Provider } from "react-redux";
 
 function App() {
-    const isLoading = useAppSelector((state) => state.app.isLoading);
-    // const a=authApi.register()
-    // console.log(a.then(res=>{
-    //     console.log(res)}))
-    const dispatch = useAppDispatch();
 
-    useEffect(() => {
-        setTimeout(() => {
-            dispatch(appActions.setIsLoading({ isLoading: false }));
-        }, 3000);
-    }, []);
-
+    const router = createHashRouter([
+        {
+            path: "/",
+            element: <div>Hello world!</div>
+        },
+        {
+            path: "/login",
+            element: <Login/>
+        },
+        {
+            path: "/profile",
+            element: <Profile/>
+        },
+        {
+            path: "/register",
+            element: <Register/>
+        },
+        {
+            path: "/forgot-password",
+            element: <ForgotPassword/>
+        },
+        {
+            path: "/set-new-password/:tokens",
+            element: <CreateNewPassword/>
+        },
+        {
+            path: "/packs",
+            element: <h1>Packs</h1>
+        },
+    ])
+    const theme = createTheme()
     return (
-        <div className="App">
-          {/*  {isLoading && <h1>Loader...</h1>}
-            <Counter />*/}
-        </div>
+        <Provider store={store}>
+            <ThemeProvider theme={theme}>
+                <RouterProvider router={router}/>
+            </ThemeProvider>
+        </Provider>
     );
 }
 
